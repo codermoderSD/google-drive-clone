@@ -34,8 +34,19 @@ const Profile = () => {
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
-        <Button variant="link" onClick={handleLogout}>
+        <Button
+          variant="link"
+          className="btn btn-outline-primary m-2"
+          onClick={handleLogout}
+        >
           Logout
+        </Button>
+        <Button
+          variant="link"
+          className="btn btn-outline-dark m-2"
+          onClick={() => navigate("/", { replace: true })}
+        >
+          Go Back
         </Button>
       </div>
     </CenteredContainer>

@@ -41,7 +41,6 @@ const AddFileButton = ({ currentFolder }) => {
             if (file.id === id) {
               return { ...file, progress: progress };
             }
-
             return file;
           });
         });
@@ -130,11 +129,11 @@ const AddFileButton = ({ currentFolder }) => {
                     <ProgressBar
                       animated={!file.error}
                       variant={file.error ? "danger" : "primary"}
-                      now={file.error ? 100 : file.progress * 100}
+                      now={file.error ? 100 : file?.progress * 100}
                       label={
                         file.error
                           ? "Error"
-                          : `${Math.round(file.progress * 100)}%`
+                          : `${Math.round(file?.progress * 100)}%`
                       }
                     />
                   </Toast.Body>
