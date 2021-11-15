@@ -1,23 +1,28 @@
 import firebase from "firebase";
 import "firebase/auth";
+import "firebase/firestore";
+import "firebase/storage";
 
-const app = firebase.initializeApp({
+const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
-});
+};
+const app = firebase.initializeApp(firebaseConfig);
 
-export const auth = app.auth();
-
+const db = app.firestore();
+export const database = {
+  folders: db.collection("folders"),
+  files: db.collection("files"),
+  formatDoc: (doc) => {
+    return { id: doc.id, ...doc.data() };
+  },
+  getCurrentTimestamp: firebase.firestore.FieldValue.serverTimestamp,
+};
+const storage = app.storage();
+const auth = app.auth();
 export default app;
-
-
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M master
-git remote add origin https://github.com/codermoderSD/google-drive-clone.git
-git push -u origin master
+export { auth, storage };
